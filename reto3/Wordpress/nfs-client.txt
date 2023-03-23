@@ -1,0 +1,9 @@
+Para configurar las instancias como NFS clients:
+
+1. Instalar nfs client corriendo 
+    sudo apt install nfs-common
+
+2. Una vez creado el directorio donde se quieren guardar los archivos correr:
+    sudo mount <server ip>:<path on the server> <path on client>
+
+NOTA: Para esto ya debio configurar el NFS server 

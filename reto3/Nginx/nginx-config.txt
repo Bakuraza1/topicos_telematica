@@ -1,0 +1,13 @@
+1. Instalar nginx en la maquina
+        sudo apt update
+        sudo apt install nginx
+
+2. Para configurar nginx copiar y pegar el contenido de nginxconf dentro de etc/nginx/nginx.conf
+
+3. To create the SSL certificate install certbot
+    sudo apt install certbot python3-certbot-nginx
+
+4. revisar el archivo nginx.conf para asegurarse que el server_name sea el mismo dominio para generar SSL
+
+5. Para generar SSL correr el comando
+    sudo certbot --nginx -d example.com -d www.example.com

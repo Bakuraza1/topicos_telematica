@@ -1,0 +1,10 @@
+Para configurar el NFS server:
+
+1. Instalar el NFS server:
+    sudo apt install nfs-kernel-server
+
+2. Ir al archivo /etc/exports y modificarlo para configurar los archivos a compartir:
+    <PATH to share> <client ip>(rw,sync,no_root_squash,no_subtree_check)
+
+3. Reiniciar el NFS server:
+    sudo systemctl restart nfs-kernel-server
