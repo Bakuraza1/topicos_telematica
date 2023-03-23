@@ -266,6 +266,7 @@ Todas las configuraciones que se deben aplicar posterior a la creacion de las in
 ## ESTRUCTURA DE DIRECTORIOS Y ARCHIVOS IMPORTANTE DEL PROYECTO
 ## Estructura de directorios y archivos importantes del proyecto
 La estructura del directorio cambiara en cada vm debido a las diferentes librerias que se necesitan, pero de forma general cada vm debera clonar este repo, y aplicar las configuraciones que necesite, de esta forma tenemos:
+
 ![image](https://user-images.githubusercontent.com/110442546/227306161-ba8f1096-0167-413d-92c4-318190adad6f.png)
 
 # Descripción del ambiente de EJECUCIÓN (en producción)
