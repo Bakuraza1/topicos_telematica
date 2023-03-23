@@ -14,7 +14,7 @@ https://www.devjgp.tech/
 # 1. Actividad
 En este reto se desarrollo el montaje de una arquitectura con wordpress, la cual cuenta con 5 elementos
 
-- Un servidor Nginx: Servidor encargado de realizar el balanceo de carga sobre los dos servidores de wordpress, ademas este servidor implementa los certificados SSL. Cabe destacar que este servidor es quien esta el los registros del DNS del dominio
+- Un servidor Nginx: Servidor encargado de realizar el balanceo de carga sobre los dos servidores de wordpress, ademas este servidor implementa los certificados SSL. Cabe destacar que este servidor es quien esta en los registros del DNS del dominio
 
 - Dos servidores Wordpress: Estos servidores son quienes estan corriendo wordpress, ambos estan conectados tanto al servidor de base de datos como al servidor NFS, desde el cual obtienen los archivos para correr Wordpress.
 
@@ -25,18 +25,19 @@ En este reto se desarrollo el montaje de una arquitectura con wordpress, la cual
 ## A tener en cuenta
 Para el desarrollo de esta actividad se utilizo GCP para instanciar todas las maquinas virtuales, y se hizo uso de docker tanto para los servidores de wordpress como para el servidor de base de datos.
 
-Para los servidores NFS y Nginx se realizo al configuracion directamente en las maquinas virtuales, las instrucciones para la instalacion se encontraran mas adelante.
+Para los servidores NFS y Nginx se realizo la configuracion directamente en las maquinas virtuales, las instrucciones para la instalacion se encontraran mas adelante.
 
-Ademas para obtener el dominio se utilizo la pagina hostinger, desde la cual tambien se hace el manejo del DNS, en este caso para la configuracion del DNS, se hizo un registro A que apunta a la ip del servidor Nginx.
+Ademas para obtener el dominio se utilizo la pagina hostinger, desde la cual tambien se hace el manejo del DNS, en este caso para la configuracion del DNS se hizo un registro A que apunta a la ip del servidor Nginx.
 
 # 1.1 Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
-- En esta actividad se logro la implementacion en gcp de los 5 elementos anteriormente expuestos, a traves de la dockerizacion y/o configuracion de la vm.
+En esta actividad se logro:
+- la implementacion en gcp de los 5 elementos anteriormente expuestos, a traves de la dockerizacion y/o configuracion de la vm.
 
-- De igual forma se logro implementar la arquitectura planteada en el documento, y las comunicaciones entre maquinas se hacen satisfactoriamente.
+- Implementar la arquitectura planteada en el documento, y las comunicaciones entre maquinas.
 
-- Ademas de esto se logro la obtencion del dominio y su configuracion, junto a la creacion del certificado SSL.
+- La obtencion del dominio y su configuracion junto a la creacion del certificado SSL.
 
-- En cuanto a los requisitos no funcionales se logro adicionalmente que al correr las mquinas virtuales ya todos los servicios queden instanciados. 
+- En cuanto a los requisitos no funcionales, entre otros, se logro que al correr las maquinas virtuales ya todos los servicios queden instanciados. 
 
 
 # 1.2 Que aspectos no cumplió o no desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
@@ -47,7 +48,7 @@ De forma general se lograron todos los items propuestos en la actividad.
 ![image](https://user-images.githubusercontent.com/110442546/227290977-4fcd469d-f334-4391-913c-d5ed41dcee1d.png)
 
 
-La arquitectura del proyecto se basa en 5 nodos tal y como se ve en la imagen, cada nodo corresponde a una maquina virtual en gcp.
+La arquitectura del proyecto se basa en 5 nodos tal y como se ve en la imagen (Cajas dentro del cuadrado), cada nodo corresponde a una maquina virtual en gcp.
 El cliente ingresara el dominio en su browser, y el browser buscara la IP correspondiente a este dominio, la cual es la ip publica de nuestro nginx server, esto se logra gracias a Hostinger (Plataforma usada para la gestion del DNS). Luego Nginx es quien hara un balanceo de carga sobre los dos servidores de wordpress, los cuales usan un NFS server, y un Db server ubicados en otras instancias para funcionar.
 
 # 3. Descripcion del ambiente se desarrollo y tecnico 
@@ -68,6 +69,7 @@ Para el desarrollo de la actividad se utilizo:
 ### Docker
 
 Para instalar docker debe correr en su maquina
+
         sudo apt update
         sudo apt install docker.io -y
         sudo apt install docker-compose -y
@@ -78,6 +80,7 @@ Para instalar docker debe correr en su maquina
         sudo usermod -a -G docker <username>
         
 Para correr un archivo docker-compose correr
+
         docker-compose -f <nombre de archivo> up
 
 Para la ejecucion de este proyecto se deben crear 5 instancias en gcp, para mayor facilidad se recomienda que se llamen, wordpress-1, wordpress-2, db-server, nfs-server y nginx-server. 
@@ -185,7 +188,7 @@ Docker-Compose
     wordpress:
 
 
-Config nfs server
+Config nfs client
 
     Para configurar las instancias como NFS clients:
 
@@ -241,7 +244,7 @@ Para el desarrollo de este reto se comenzo por estudiar un poco sobre gcp para e
 
 Luego de esto se comenzo a "separar" esta aplicacion monolitica, primero creando dos instancias, una de db y otra de wordpress. A partir de esto fue facil la creacion de una tercera maquina virtual que tambien solo tuviera Wordpress y se conectara de igual forma a la db.
 
-Posterior a instanciar estas 3 maquinas virtuales se creo el servidor NFS, se realizo la configuracion pertitente y posteriromente se configuro las 2 maquinas de Wordpress como clientes NFS, que consumen el directorio compartido del servidor.
+Posterior a instanciar estas 3 maquinas virtuales se creo el servidor NFS, se realizo la configuracion pertitente y posteriromente se configuraron las 2 maquinas de Wordpress como clientes NFS, que consumen el directorio compartido del servidor.
 
 Finalmente en cuanto a las instancias se crea una 5 instancia para el manejo de nginx, en esta se hace toda la configuracion para realizar un round robin entre Wordpress-1 y wordpress-2.
 
@@ -263,13 +266,16 @@ Todas las configuraciones que se deben aplicar posterior a la creacion de las in
 ## ESTRUCTURA DE DIRECTORIOS Y ARCHIVOS IMPORTANTE DEL PROYECTO
 ## Estructura de directorios y archivos importantes del proyecto
 La estructura del directorio cambiara en cada vm debido a las diferentes librerias que se necesitan, pero de forma general cada vm debera clonar este repo, y aplicar las configuraciones que necesite, de esta forma tenemos:
+![image](https://user-images.githubusercontent.com/110442546/227306161-ba8f1096-0167-413d-92c4-318190adad6f.png)
 
 # Descripción del ambiente de EJECUCIÓN (en producción)
 
 
 ## IP o nombres de dominio en nube o en la máquina servidor
 Para facilitar el acceder a la pagina, se utilizo un dominio el cual esta configurado para que apunte a la ip publica del Nginx-server. 
-jgpdev.tech
+
+        devjgp.tech
+        www.devjgp.tech
 
 ## Como se lanza el servidor.
 
@@ -280,4 +286,6 @@ Despues de lanzar la configuracion inicial simplemente al iniciar las instancias
 Para utilizar la aplicacion el usuario simplemente debe ingresar a la url: jgpdev.tech
 
 ## Resultados o Pantallazos
+![image](https://user-images.githubusercontent.com/110442546/227307679-f4571722-8703-4393-bdc0-2b95beb464e5.png)
+![image](https://user-images.githubusercontent.com/110442546/227308776-34055ef8-97a2-4f05-8ff7-54cb6fbbb8af.png)
 
