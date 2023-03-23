@@ -13,3 +13,6 @@ En este repositorio se encuentran diferentes carpetas para cada instancia usada 
 - 1 nginx 
 
 Dentro de cada carpeta se encuentras los archivos y/o instrucciones pertitentes de cada instancia.
+
+### Docker
+Cabe destacar que para las maquinas de wordpress y db se utilizo docker, en las carpetas correspondientes se encuentra el docker compose.
