@@ -1,6 +1,12 @@
-# topicos_telematica Reto3 
-## Desarrollado por Julian Giraldo Perez
+# jgiraldop-st0263
+## info de la materia: st0263 Topicos Especiales en Telematica
+#
+## Estudiante(s): Julian Giraldo Perez, jgiraldop@eafit.edu.co
+#
+## Profesor: Edwin Nelson Montoya Munera, emontoya@eafit.edu.co
+#
 
+# Reto 3, Wordpress escalable
 ### Link del proyecto
 https://www.devjgp.tech/
 
