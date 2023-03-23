@@ -59,6 +59,21 @@ Para el desarrollo de la actividad se utilizo:
 
 ## Compilacion y ejecucion
 
+### Docker
+
+Para instalar docker debe correr en su maquina
+        sudo apt update
+        sudo apt install docker.io -y
+        sudo apt install docker-compose -y
+        sudo apt install git -y
+
+        sudo systemctl enable docker
+        sudo systemctl start docker
+        sudo usermod -a -G docker <username>
+        
+Para correr un archivo docker-compose correr
+        docker-compose -f <nombre de archivo> up
+
 Para la ejecucion de este proyecto se deben crear 5 instancias en gcp, para mayor facilidad se recomienda que se llamen, wordpress-1, wordpress-2, db-server, nfs-server y nginx-server. 
 
 En cada carpeta de este repositorio se encuentran las instrucciones pertintentes de cada tipo de instancia, aun asi se listara a continuacion las configuraciones de cada una.
